@@ -1,0 +1,13 @@
+# Package Information for pkg-config
+
+prefix=/Users/blakesutton/Documents/WGU/2021-12_Term/CAPSTONE/Task_2/Capstone_App/env
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: SQLite
+Description: SQL database engine
+Version: 3.37.2
+Libs: -L${libdir} -lsqlite3
+Libs.private: -lz 
+Cflags: -I${includedir}

@@ -1,0 +1,14 @@
+prefix=/Users/blakesutton/Documents/WGU/2021-12_Term/CAPSTONE/Task_2/Capstone_App/env
+exec_prefix=/Users/blakesutton/Documents/WGU/2021-12_Term/CAPSTONE/Task_2/Capstone_App/env
+libdir=/Users/blakesutton/Documents/WGU/2021-12_Term/CAPSTONE/Task_2/Capstone_App/env/lib
+includedir=/Users/blakesutton/Documents/WGU/2021-12_Term/CAPSTONE/Task_2/Capstone_App/env/include
+
+Name: FreeType 2
+URL: https://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 24.0.18
+Requires:
+Requires.private: 
+Libs: -L${libdir} -lfreetype
+Libs.private: -lz -L/Users/blakesutton/Documents/WGU/2021-12_Term/CAPSTONE/Task_2/Capstone_App/env/lib -lpng16 -lz
+Cflags: -I${includedir}/freetype2
