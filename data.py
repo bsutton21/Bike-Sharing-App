@@ -34,4 +34,4 @@ def modify_data():
     bike["Precipitation"] = np.where((bike['Rainfall (mm)'] > 0) | (bike['Snowfall (cm)'] > 0), True, False)
 
     # Return bike with new "Datetime" and "Precipitation" columns
-    return bike
+    bike.to_csv("BikeDataExpanded.csv", index=False)

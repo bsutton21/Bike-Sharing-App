@@ -1,20 +1,23 @@
-from flask import Flask, render_template
+from crypt import methods
+from flask import Flask, render_template, redirect, url_for, request, session
 import pandas as pd
 import numpy as np
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split, GridSearchCV
 import datetime
 
 app = Flask(__name__)
+username = "admin"
+password = "admin"
 
 @app.route("/")
-def profile(): 
-    return render_template("main.html") # don't put html in the return statement
+def index(): 
+    return render_template("login.html") # loads the login page
+
+@app.route("/predict", methods="POST", "GET")
+def predict():
+    if request.method == "POST":
+        return ##### TO DO
+    return
 
 
 if __name__ == "__main__":
-    app.run(debug=True) # tells it to start the server
+    app.run(debug=True) # tells it to start the app/server
