@@ -8,32 +8,33 @@ app = Flask(__name__)
 username = "admin"
 password = "admin"
 
-@app.route("/", methods=["GET", "POST"])
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
+@app.route("/login", methods=["GET"])
 def index(): 
     return render_template("login.html") # loads the login page
 
-@app.route("/main", methods=["GET", "POST"])
+@app.route("/login", methods=["POST"])
 def login():
-    if request.form["username"] == username and request.form["password"] == password:
-        return render_template("main.html")
-    else:
-        return render_template("login.html")
+    if request.method == "POST":
+        if username == request.form['username'] and password == request.form['password']:
+            return redirect("/main", code=307)
+        else:
+            return render_template("login.html")
 
-@app.route("/main")
+@app.route("/main", methods=["GET", "POST"])
 def main():
     return render_template("main.html") # loads the main page
 
 @app.route("/predict", methods=["POST", "GET"])
 def predict():
     if request.method == "POST":
-        return render_template("machine_learning.html") # loads the machine learning page
+        return render_template("predictions.html") # loads the machine learning page
     else:
         print("Invalid Request")
 
-@app.route("/visualizations")
+@app.route("/visualizations", methods=["GET", "POST"])
 def visual():
-    return render_template("visuzalizations.html") # loads the visualizations page
+    return render_template("visualizations.html") # loads the visualizations page
 
 if __name__ == "__main__":
     app.run(debug=True) # tells it to start the app/server
