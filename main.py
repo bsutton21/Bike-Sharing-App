@@ -3,6 +3,8 @@ from flask import Flask, render_template, redirect, url_for, request, session
 import pandas as pd
 import numpy as np
 import datetime
+from predictions import predictor
+import data
 
 app = Flask(__name__)
 username = "admin"
@@ -28,7 +30,15 @@ def main():
 @app.route("/predict", methods=["POST", "GET"])
 def predict():
     if request.method == "POST":
-        return render_template("predictions.html") # loads the machine learning page
+        precip = request.values["precipitation"][0:1]
+        temp = request.values["temperature"]
+        humid = request.values["humidity"]
+        predict_data = {"temperature": temp, "humidity": humid, "precipitation": precip}
+        predict_model = predictor(predict_data)
+        pred_demand = int(round(predict_model["user_preds"]))
+        score = round(predict_model["score"], 3) * 100
+
+        return render_template("predictions.html", pred_demand=pred_demand, score=score) # loads the machine learning page
     else:
         print("Invalid Request")
 

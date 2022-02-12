@@ -3,7 +3,6 @@ import numpy as np
 import datetime
 
 # initializing bike by reading in the BikeData.csv
-bike = pd.read_csv("BikeData.csv")
 
 def modify_data():
     """
@@ -15,13 +14,17 @@ def modify_data():
     1) Reformat the "Date" column dd/mm/yyyy to standard data format
     2) Create pandas dataframe with dictionary of Day:Hour then combine the key/value pairs into a single, new "Datetime" column
     3) Created new "Precipitation" boolean column where "True" if rainfall or snowfall are >0
+    4) Dropped "Rainfall (mm)", "Snowfall (cm)", "Wind speed (m/s)", "Visibility (10m)", 
+       "Dew point temperature (C)", "Solar Radiation (MJ/m2)" since we aren't using those
+       datapoints for our predictions.
 
     """
+    bike = pd.read_csv("data/BikeData.csv")
 
     # Reformatting the data in the "Date" column from dd/mm/yyyy to standard date format
     for i in range(0, len(bike["Date"])):
         bike["Date"][i] = datetime.datetime.strptime(bike["Date"][i], "%d/%m/%Y").date()
-
+    
     # Creating pd dataframe with dictionary of Day: Hour
     dt_df = pd.DataFrame({
         'Day': np.array(bike["Date"]), 
@@ -31,7 +34,8 @@ def modify_data():
     bike["Datetime"] = pd.to_datetime(dt_df.Day) + pd.to_timedelta(dt_df.Hour, unit='h')
 
     # Adding Precipitation boolean column - "True" if either "Rainfall (mm)" or "Snowfall (cm)" are greater than 0
-    bike["Precipitation"] = np.where((bike['Rainfall (mm)'] > 0) | (bike['Snowfall (cm)'] > 0), True, False)
+    bike["Precipitation"] = np.where((bike['Rainfall (mm)'] > 0) | (bike['Snowfall (cm)'] > 0), 1, 0)
 
+    bike = bike.drop(["Rainfall (mm)", "Snowfall (cm)", "Wind speed (m/s)", "Visibility (10m)", "Dew point temperature (C)", "Solar Radiation (MJ/m2)"], axis=1)
     # Return bike with new "Datetime" and "Precipitation" columns
-    bike.to_csv("BikeDataExpanded.csv", index=False)
+    return bike.to_csv("data/BikeDataExpanded.csv", index=False)
