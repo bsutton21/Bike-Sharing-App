@@ -25,11 +25,21 @@
 
         <div class="p-5 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
-              <h1 class="display-5 fw-bold">Custom jumbotron</h1>
-              <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-              <button class="btn btn-primary btn-lg" type="button">Example button</button>
+                <h1 class="display-5 fw-bold">Data Visualizations</h1>
+                <p class="d-flex justify-content-center"><h2>Sales Over Time</h2></p>
+                <img class="d-flex justify-content-center img-responsive" src="../images/sales_over_time.png" alt="Sales Over Time Graph">
+                <p class="d-flex justify-content-center"><h2>Relationship Between Bike Rentals and Temperature</h2></p>
+                <img class="d-flex justify-content-center img-responsive" src="../images/sales_and_temp.png" alt="Sales Over Time Graph">
+                <p class="d-flex justify-content-center"><h2>Relationship Between Bike Rentals and Precipitation</h2></p>
+                <img class="d-flex justify-content-center img-responsive" src="../images/sales_and_precip.png" alt="Sales Over Time Graph">
+                <p class="d-flex justify-content-center"><h2>Relationship Between Bike Rentals and Humidity</h2></p>
+                <img class="d-flex justify-content-center img-responsive" src="../images/sales_and_humid.png" alt="Sales Over Time Graph">
+                <p class="d-flex justify-content-center"><h2>First 25 Lines of the Bike Data</h2></p>
+                <div style="width: 50%; margin-left: 25%; margin-top: 58px;">
+                    {{ bike_head|safe }}
+                </div>
             </div>
-          </div>
+        </div>
 
         <footer> <!--footer of the body-->
 

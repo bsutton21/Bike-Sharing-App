@@ -3,11 +3,14 @@ import pandas as pd
 import numpy as np
 import datetime
 import matplotlib.pyplot as plt
+import dash
 
 # setting plt figure style
 plt.style.use('ggplot');
 
-bike_visual = pd.read_csv("BikeData.csv")
+data.modify_data_visualizations
+bike_visual = pd.read_csv("data/BikeDataVisualizations.csv")
+bike = pd.read_csv("data/BikeData.csv")
 
 # Creates a bar graph to visualize sales over time
 def sales_over_time():
@@ -29,7 +32,7 @@ def sales_over_time():
                label="Mean",
                color="black",
                linestyle="--");
-    return fig
+    return fig.savefig("images/sales_over_time.png")
 
 # Scatter plot showing relationship between bike rentals and temperature
 def temper_scatter():
@@ -54,7 +57,7 @@ def temper_scatter():
     ax.axhline(bike_visual["Rented Bike Count"].mean(),
                label="Mean",
                linestyle="--");
-    return fig
+    return fig.savefig("images/sales_and_temp.png")
 
 # Scatter plot showing relationship between bike rentals and precipitation
 def precip_scatter():
@@ -80,10 +83,10 @@ def precip_scatter():
                label="Mean",
                color="black",
                linestyle="--");
-    return fig
+    return fig.savefig("images/sales_and_precip.png")
 
 # Scatter plot showing relationship between bike rentals and precipitation
-def precip_scatter():
+def humid_scatter():
     # Setting subplots and initializing the figure size
     fig, ax = plt.subplots(figsize=(20,8))
 
@@ -105,7 +108,8 @@ def precip_scatter():
     ax.axhline(bike_visual["Rented Bike Count"].mean(),
                label="Mean",
                linestyle="--");
-    return fig
+    return fig.savefig("images/sales_and_humid.png")
 
 def bike_head():
-    return bike_visual.head(25)
+    bike_head = bike.head(25)
+    return bike_head.to_csv("data/bike_head.csv")

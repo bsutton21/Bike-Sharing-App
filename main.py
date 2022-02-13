@@ -1,10 +1,12 @@
-from crypt import methods
+from genericpath import exists
 from flask import Flask, render_template, redirect, url_for, request, session
 import pandas as pd
 import numpy as np
 import datetime
 from predictions import predictor
 import data
+from visualizations import humid_scatter, precip_scatter, sales_over_time, temper_scatter, bike_head
+import dash
 
 app = Flask(__name__)
 username = "admin"
@@ -43,8 +45,25 @@ def predict():
         print("Invalid Request")
 
 @app.route("/visualizations", methods=["GET", "POST"])
-def visual():
-    return render_template("visualizations.html") # loads the visualizations page
+def visualizations():
+    if not exists("images/sales_over_time.png"):
+        sales_over_time()
+    if not exists("images/sales_and_temp.png"):
+        temper_scatter()
+    if not exists("images/sales_and_precip.png"):
+        precip_scatter()
+    if not exists("images/sales_and_humid.png"):
+        humid_scatter()
+    visualizations.bike_head()
+    bike_head = pd.read_csv("data/bike_head.csv")
+    return render_template("visualizations.html", bike_head=bike_head.to_html()) # loads the visualizations page
 
 if __name__ == "__main__":
     app.run(debug=True) # tells it to start the app/server
+
+app = dash.Dash(
+    __name__,
+    external_stylesheets=[dbc.themes.BOOTSTRAP],
+    server=server,
+    routes_pathname_prefix='/visual/'
+)
