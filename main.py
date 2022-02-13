@@ -32,10 +32,10 @@ def predict():
     if request.method == "POST":
         precip = request.values["precipitation"][0:1]
         temp = request.values["temperature"]
-        humid = request.values["humidity"]
+        humid = int(request.values["humidity"])
         predict_data = {"temperature": temp, "humidity": humid, "precipitation": precip}
         predict_model = predictor(predict_data)
-        pred_demand = int(round(predict_model["user_preds"]))
+        pred_demand = int(round(predict_model["predicted_demand"]))
         score = round(predict_model["score"], 3) * 100
 
         return render_template("predictions.html", pred_demand=pred_demand, score=score) # loads the machine learning page

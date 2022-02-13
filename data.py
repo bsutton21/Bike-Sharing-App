@@ -4,7 +4,7 @@ import datetime
 
 # initializing bike by reading in the BikeData.csv
 
-def modify_data():
+def modify_data_visualizations():
     """
 
     Very little cleaning was required on this data.  I used Jupyter Notebook to verify that
@@ -38,4 +38,7 @@ def modify_data():
 
     bike = bike.drop(["Rainfall (mm)", "Snowfall (cm)", "Wind speed (m/s)", "Visibility (10m)", "Dew point temperature (C)", "Solar Radiation (MJ/m2)"], axis=1)
     # Return bike with new "Datetime" and "Precipitation" columns
-    return bike.to_csv("data/BikeDataExpanded.csv", index=False)
+    return bike.to_csv("data/BikeDataVisualizations.csv", index=False)
+
+def modify_data_predictions():
+    return

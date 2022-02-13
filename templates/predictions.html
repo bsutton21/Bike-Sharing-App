@@ -14,7 +14,7 @@
         
     <body>
         <div class="container">
-            <header class="d-flex justify-content-left py-3 bg-dark bg-gradient text-white">
+            <header class="d-flex justify-content-center py-3 bg-dark bg-gradient text-white">
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="main" class="nav-link active">Go Back</a></li>
                 </ul>
@@ -24,7 +24,7 @@
         <div class="d-flex justify-content-center p-5 mb-4 bg-light rounded-3 w-100">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold" style="text-align: center;">Bike Demand Prediction</h1>
-                <p style="text-align: center;">Modeling predicts that you will have <b>{{ user_preds }}</b> rentals tomorrow.</p>
+                <p style="text-align: center;">Modeling predicts that you will have <b>{{ pred_demand }}</b> rentals tomorrow.</p>
                 <p style="text-align: center;">Predicted accuracy of the model is <b>{{ score }}</b></p>
                 
             </div>
