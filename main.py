@@ -1,12 +1,9 @@
 from genericpath import exists
-from flask import Flask, render_template, redirect, url_for, request, session
+from flask import Flask, render_template, redirect, request
 import pandas as pd
-import numpy as np
-import datetime
 from predictions import predictor
-import data
 from visualizations import humid_graph, humid_scatter, precip_graph, precip_scatter, sales_graph, sales_over_time, temp_graph, temper_scatter, bike_head
-from dash import Dash, dcc, html, dash_table
+from dash import Dash, dcc, html
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 
