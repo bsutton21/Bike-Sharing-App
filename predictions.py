@@ -13,8 +13,6 @@ def predictor(attributes):
     x = bike_preds.drop(["Rented Bike Count"], axis=1)
     y = bike_preds["Rented Bike Count"]
 
-    x.to_csv("data/X.csv", index=False)
-    print("x: ", x.dtypes)
     """
     # Define different features and transformer pipeline
     categorical_features = ["Date", "Seasons", "Holiday", "Functioning Day"]
@@ -39,12 +37,9 @@ def predictor(attributes):
     score = model.score(X_test, y_test)
 
     user_data = pd.read_csv("data/UserBikeData.csv")
-    print("UserBikeData: ", user_data.dtypes)
     user_data["Humidity (%)"] = int(attributes["humidity"])
     user_data["Temperature (C)"] = int(attributes["temperature"])
     user_data["Precipitation"] = int(attributes["precipitation"])
-
-    user_data.to_csv("data/test.csv", index=False)
 
     user_preds = model.predict(user_data) # <--- change this back to transformed_user_data if I revert
 
