@@ -237,7 +237,7 @@ humid_vis = dbc.Container(
                                     )
                                 ],
                                 'layout': dict(
-                                    xaxis={'title': 'Temperature'},
+                                    xaxis={'title': 'Humidity'},
                                     yaxis={'title': 'Number of Bike Rentals'},
                                     margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
                                     legend={'x': 0, 'y': 1},
