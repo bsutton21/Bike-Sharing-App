@@ -1,11 +1,12 @@
 from genericpath import exists
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, send_from_directory
 import pandas as pd
 from predictions import predictor
 from visualizations import humid_graph, humid_scatter, precip_graph, precip_scatter, sales_graph, sales_over_time, temp_graph, temper_scatter, bike_head
 from dash import Dash, dcc, html
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
+import os
 
 server = Flask(__name__)
 username = "admin"
@@ -266,6 +267,11 @@ app.layout = html.Div([nav, sales_time_vis, temp_vis, precip_vis, humid_vis, tab
 @server.route("/login", methods=["GET"])
 def index(): 
     return render_template("login.html") # loads the login page
+
+@server.route("/favicon.ico", methods=["GET"])
+def favicon():
+    return send_from_directory(os.path.join(server.root_path, "static"),
+     "favicon.ico", mimetype="image/vnd.microsoft.icon")
 
 @server.route("/login", methods=["POST"])
 def login():
