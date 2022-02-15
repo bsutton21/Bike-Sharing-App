@@ -1,8 +1,6 @@
-from genericpath import exists
 from flask import Flask, render_template, redirect, request, send_from_directory
-import pandas as pd
 from predictions import predictor
-from visualizations import humid_graph, humid_scatter, precip_graph, precip_scatter, sales_graph, sales_over_time, temp_graph, temper_scatter, bike_head
+from visualizations import humid_graph, precip_graph, sales_graph, temp_graph, bike_head
 from dash import Dash, dcc, html
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
@@ -259,20 +257,25 @@ app = Dash(
     server=server,
     routes_pathname_prefix='/visual/'
 )
+
 app.title = "Historical Bike Demand Visualizations"
 app.layout = html.Div([nav, sales_time_vis, temp_vis, precip_vis, humid_vis, tab_head],
                       className = "container")
 
+# Opens the login page if the user routes to a URL ending in "/" or "/login"
 @server.route("/", methods=["GET"])
 @server.route("/login", methods=["GET"])
 def index(): 
     return render_template("login.html") # loads the login page
 
+# This sets the icon in the title bar of the browser
 @server.route("/favicon.ico", methods=["GET"])
 def favicon():
     return send_from_directory(os.path.join(server.root_path, "static"),
      "favicon.ico", mimetype="image/vnd.microsoft.icon")
 
+# Reroutes to the main page if the user enters the correct credentials
+# Otherwise, reloads the login page
 @server.route("/login", methods=["POST"])
 def login():
     if request.method == "POST":
@@ -281,10 +284,12 @@ def login():
         else:
             return render_template("login.html")
 
+# Opens the main page if the user routes to a URL ending in "/main"
 @server.route("/main", methods=["GET", "POST"])
 def main():
     return render_template("main.html") # loads the main page
 
+# Opens the prediction page if the user routes to a URL ending in "/predict"
 @server.route("/predict", methods=["POST", "GET"])
 def predict():
     if request.method == "POST":
@@ -300,19 +305,6 @@ def predict():
     else:
         print("Invalid Request")
 
-@server.route("/visualizations", methods=["GET", "POST"])
-def visualizations():
-    if not exists("images/sales_over_time.png"):
-        sales_over_time()
-    if not exists("images/sales_and_temp.png"):
-        temper_scatter()
-    if not exists("images/sales_and_precip.png"):
-        precip_scatter()
-    if not exists("images/sales_and_humid.png"):
-        humid_scatter()
-    visualizations.bike_head()
-    bike_head = pd.read_csv("data/bike_head.csv")
-    return render_template("visualizations.html", bike_head=bike_head.to_html()) # loads the visualizations page
-
+# Tells Flask to start the server
 if __name__ == "__main__":
-    server.run(debug=True) # tells it to start the app/server
+    server.run(debug=True)
