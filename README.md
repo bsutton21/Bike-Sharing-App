@@ -7,5 +7,7 @@ URL: https://bike-sharing-app-bwoj.onrender.com<br>
 username: admin<br>
 password: admin
 
+Note: This was migrated from Heroku to Render and is running on a free-tier instance, which can take some time to spin up if it hasn't been accessed in a while. Subsequent visits within a short timeframe will be quicker as will visits to other pages within the app. Due to this being free-tier, the resources devoted to the instance are also very limited so I've notied that the interactive graphs do take some time to load.
+
 The accompanying Jupyter Notebook can be found at https://github.com/bsutton21/bike_sharing.
 
